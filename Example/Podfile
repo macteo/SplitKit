@@ -1,0 +1,21 @@
+project 'SplitKit Example'
+use_frameworks!
+
+abstract_target 'SplitKit' do
+  pod 'SplitKit', :path => '..'
+  
+  target 'SplitKit Example' do
+    platform :ios, '9.0'
+  end
+  
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == 'SplitKit'
+        print "Changing SplitKit swift version to 4.0\n"
+        target.build_configurations.each do |config|
+          config.build_settings['SWIFT_VERSION'] = '4.0'
+        end
+      end
+    end
+  end
+end

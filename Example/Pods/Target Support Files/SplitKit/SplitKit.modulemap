@@ -1,0 +1,6 @@
+framework module SplitKit {
+  umbrella header "SplitKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
