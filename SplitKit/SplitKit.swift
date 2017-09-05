@@ -139,16 +139,19 @@ fileprivate class HandleView: UIView {
     
     lazy var barsLayer : CALayer = {
         let barsLayer = CALayer()
-        barsLayer.frame = CGRect(x: (bounds.size.width - barHeight) / 2, y: (bounds.size.height - barHeight) / 2, width: barHeight, height: barHeight)
-        leftBar = verticalBar()
-        if let leftBar = leftBar {
-            leftBar.frame.origin.x = barWidth
+        barsLayer.frame = CGRect(x: (self.bounds.size.width - self.barHeight) / 2,
+                                 y: (self.bounds.size.height - self.barHeight) / 2,
+                                 width: self.barHeight,
+                                 height: self.barHeight)
+        self.leftBar = self.verticalBar()
+        if let leftBar = self.leftBar {
+            leftBar.frame.origin.x = self.barWidth
             barsLayer.addSublayer(leftBar)
         }
         
-        rightBar = verticalBar()
-        if let rightBar = rightBar {
-            rightBar.frame.origin.x = barWidth * 3
+        self.rightBar = self.verticalBar()
+        if let rightBar = self.rightBar {
+            rightBar.frame.origin.x = self.barWidth * 3
             barsLayer.addSublayer(rightBar)
         }
         
