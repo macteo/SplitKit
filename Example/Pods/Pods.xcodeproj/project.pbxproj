@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		0F84AEF58AD53D95B96B04FC4EF8EBEF /* Pods-SplitKit-SplitKit Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C7ABF135F22E45C758D0266A0AF3D /* Pods-SplitKit-SplitKit Example-dummy.m */; };
-		3294C5813955DCCC0510A5B709522073 /* SplitKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AECC7C3463556629DB2373B0E616D /* SplitKit-dummy.m */; };
-		3AC9B7D1B85B56A4AA70E446FA430494 /* SplitKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37AD3AD6690B5A5947BFF161F12D870 /* SplitKit.swift */; };
+		30B85A163D835449710976D942A41644 /* Arrangement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DA9EF8057EBF62FBAACFB595E81664 /* Arrangement.swift */; };
+		4F59F89FB5BE6811CAD46D9D1D1A15C3 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CADEC2D6BD4175F8B1609AB1D66FE3 /* SplitViewController.swift */; };
 		54F30457FC1BC3654C066B27577232DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		59CFD80608D90155A8D49CEFDD24A6EF /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F610207E387648ACF363A15B73C4 /* HandleView.swift */; };
 		64165CF47A74CDC43AD0A4AAF9429E7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		DEC1D0544DEEF791A39F398843CD38CF /* SplitKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EC247D77B7B273702191567675F9DFA6 /* SplitKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81C94A91DD6754192F7A23352559FBEB /* InstantPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4229955D6EA4FD1626564154AD3AB5 /* InstantPanGestureRecognizer.swift */; };
+		828111C28FF93444B645A611FE673C89 /* Snapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B6E42DC54B5159FB303D16AA7CC41F /* Snapped.swift */; };
+		DEC1D0544DEEF791A39F398843CD38CF /* SplitKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A7E0825A947C4C9E25CAAC4AE9AF2B0 /* SplitKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E52B7A155F15AD3E2E3D68794E8C24E3 /* Pods-SplitKit-SplitKit Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C29ACC346648B03C34B1C0C8E23BD00 /* Pods-SplitKit-SplitKit Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F1D76E3C8E515345EC6F56DAC01B06B8 /* SplitKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E4FB863507532DB23E5667A43080EA /* SplitKit-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,11 +31,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08E0F610207E387648ACF363A15B73C4 /* HandleView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HandleView.swift; path = SplitKit/HandleView.swift; sourceTree = "<group>"; };
+		09CADEC2D6BD4175F8B1609AB1D66FE3 /* SplitViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplitViewController.swift; path = SplitKit/SplitViewController.swift; sourceTree = "<group>"; };
+		12DA9EF8057EBF62FBAACFB595E81664 /* Arrangement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Arrangement.swift; path = SplitKit/Arrangement.swift; sourceTree = "<group>"; };
 		1A6E51B0C42D07B8E814C596D07FF9B2 /* Pods-SplitKit-SplitKit Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SplitKit-SplitKit Example.release.xcconfig"; sourceTree = "<group>"; };
 		1B226E88CE2CC206FA2651260E88BCFF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2C2AECC7C3463556629DB2373B0E616D /* SplitKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SplitKit-dummy.m"; sourceTree = "<group>"; };
-		404E7EA301310B3197D6ADE3425D5465 /* SplitKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SplitKit.modulemap; sourceTree = "<group>"; };
+		2A7E0825A947C4C9E25CAAC4AE9AF2B0 /* SplitKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SplitKit-umbrella.h"; sourceTree = "<group>"; };
+		2D4229955D6EA4FD1626564154AD3AB5 /* InstantPanGestureRecognizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InstantPanGestureRecognizer.swift; path = SplitKit/InstantPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		323FDB057BF4C96C348187BD1A6C6BD5 /* SplitKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SplitKit-prefix.pch"; sourceTree = "<group>"; };
+		42E4FB863507532DB23E5667A43080EA /* SplitKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SplitKit-dummy.m"; sourceTree = "<group>"; };
 		479C7ABF135F22E45C758D0266A0AF3D /* Pods-SplitKit-SplitKit Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SplitKit-SplitKit Example-dummy.m"; sourceTree = "<group>"; };
+		48B6E42DC54B5159FB303D16AA7CC41F /* Snapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Snapped.swift; path = SplitKit/Snapped.swift; sourceTree = "<group>"; };
 		5C29ACC346648B03C34B1C0C8E23BD00 /* Pods-SplitKit-SplitKit Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SplitKit-SplitKit Example-umbrella.h"; sourceTree = "<group>"; };
 		63963406E71382426C1F593BD343BDAB /* Pods-SplitKit-SplitKit Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SplitKit-SplitKit Example-frameworks.sh"; sourceTree = "<group>"; };
 		65B7E25E4789F32FD4B4E19DE737D209 /* Pods-SplitKit-SplitKit Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SplitKit-SplitKit Example-resources.sh"; sourceTree = "<group>"; };
@@ -40,14 +50,12 @@
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		99747E1480D9CF40425B9B15FCC02547 /* SplitKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SplitKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A58BAA41BEA9F19FAA6D13B971C26DD /* Pods-SplitKit-SplitKit Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SplitKit-SplitKit Example.debug.xcconfig"; sourceTree = "<group>"; };
+		9DE5707C7CC24FDF6AD3DD3F04F5C84B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A477C9AE0F9BEB0996A92E1A32C3282F /* SplitKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SplitKit.xcconfig; sourceTree = "<group>"; };
 		B305793495A9A3A0E20903B64672F320 /* Pods-SplitKit-SplitKit Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SplitKit-SplitKit Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BA7E59305D274C961E9EA66253EFF34F /* Pods_SplitKit_SplitKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SplitKit_SplitKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C140B7AD0082625E3A10E02DD5C000F8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C37AD3AD6690B5A5947BFF161F12D870 /* SplitKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SplitKit.swift; path = SplitKit/SplitKit.swift; sourceTree = "<group>"; };
 		DABB70F6F6FF96499266A7C5C4E1D5D2 /* Pods-SplitKit-SplitKit Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SplitKit-SplitKit Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		E747418A7B879262B74A53F4949F6672 /* SplitKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SplitKit.xcconfig; sourceTree = "<group>"; };
-		EC247D77B7B273702191567675F9DFA6 /* SplitKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SplitKit-umbrella.h"; sourceTree = "<group>"; };
-		FE589391A6EBE7512987369E60EDD9E1 /* SplitKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SplitKit-prefix.pch"; sourceTree = "<group>"; };
+		F08660752DD7BA7E1BD2FC4B4B33FBAF /* SplitKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SplitKit.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,16 +78,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		009EDEE5EB7C99DC28D6325FC7AE2393 /* SplitKit */ = {
-			isa = PBXGroup;
-			children = (
-				C37AD3AD6690B5A5947BFF161F12D870 /* SplitKit.swift */,
-				EBF52D8C2EA3BDA0940CA3AAB71EC23D /* Support Files */,
-			);
-			name = SplitKit;
-			path = ../..;
-			sourceTree = "<group>";
-		};
 		317A2234F848826F82DC4595D20EA57B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,10 +87,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		37730A9AAE69C1A424909421D5568F6C /* Development Pods */ = {
+		5A2884460E69C9AFE82FA75E2E63DBF0 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				009EDEE5EB7C99DC28D6325FC7AE2393 /* SplitKit */,
+				BCE609937CAF99DD331EB4C7E4189766 /* SplitKit */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -101,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				37730A9AAE69C1A424909421D5568F6C /* Development Pods */,
+				5A2884460E69C9AFE82FA75E2E63DBF0 /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
 				317A2234F848826F82DC4595D20EA57B /* Products */,
 				A72CEB8D59DF8705E1B51A51EAED8898 /* Targets Support Files */,
@@ -142,6 +140,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BCE609937CAF99DD331EB4C7E4189766 /* SplitKit */ = {
+			isa = PBXGroup;
+			children = (
+				12DA9EF8057EBF62FBAACFB595E81664 /* Arrangement.swift */,
+				08E0F610207E387648ACF363A15B73C4 /* HandleView.swift */,
+				2D4229955D6EA4FD1626564154AD3AB5 /* InstantPanGestureRecognizer.swift */,
+				48B6E42DC54B5159FB303D16AA7CC41F /* Snapped.swift */,
+				09CADEC2D6BD4175F8B1609AB1D66FE3 /* SplitViewController.swift */,
+				E342941841D71CA1CEF9FF35537E05F0 /* Support Files */,
+			);
+			name = SplitKit;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,15 +162,15 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		EBF52D8C2EA3BDA0940CA3AAB71EC23D /* Support Files */ = {
+		E342941841D71CA1CEF9FF35537E05F0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				C140B7AD0082625E3A10E02DD5C000F8 /* Info.plist */,
-				404E7EA301310B3197D6ADE3425D5465 /* SplitKit.modulemap */,
-				E747418A7B879262B74A53F4949F6672 /* SplitKit.xcconfig */,
-				2C2AECC7C3463556629DB2373B0E616D /* SplitKit-dummy.m */,
-				FE589391A6EBE7512987369E60EDD9E1 /* SplitKit-prefix.pch */,
-				EC247D77B7B273702191567675F9DFA6 /* SplitKit-umbrella.h */,
+				9DE5707C7CC24FDF6AD3DD3F04F5C84B /* Info.plist */,
+				F08660752DD7BA7E1BD2FC4B4B33FBAF /* SplitKit.modulemap */,
+				A477C9AE0F9BEB0996A92E1A32C3282F /* SplitKit.xcconfig */,
+				42E4FB863507532DB23E5667A43080EA /* SplitKit-dummy.m */,
+				323FDB057BF4C96C348187BD1A6C6BD5 /* SplitKit-prefix.pch */,
+				2A7E0825A947C4C9E25CAAC4AE9AF2B0 /* SplitKit-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/SplitKit";
@@ -208,7 +220,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9114F7DA8DB335FDC974E2FC515D65F5 /* Build configuration list for PBXNativeTarget "SplitKit" */;
 			buildPhases = (
-				CA642009EC62652267E9B06778BD1F9D /* Sources */,
+				CB82896123C6E48160BA2577E2618124 /* Sources */,
 				63B6553B30A7A5CA90735FF6F5C3F1F8 /* Frameworks */,
 				9642F761C9562C58575AFCD7E81EF6B8 /* Headers */,
 			);
@@ -257,12 +269,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA642009EC62652267E9B06778BD1F9D /* Sources */ = {
+		CB82896123C6E48160BA2577E2618124 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3294C5813955DCCC0510A5B709522073 /* SplitKit-dummy.m in Sources */,
-				3AC9B7D1B85B56A4AA70E446FA430494 /* SplitKit.swift in Sources */,
+				30B85A163D835449710976D942A41644 /* Arrangement.swift in Sources */,
+				59CFD80608D90155A8D49CEFDD24A6EF /* HandleView.swift in Sources */,
+				81C94A91DD6754192F7A23352559FBEB /* InstantPanGestureRecognizer.swift in Sources */,
+				828111C28FF93444B645A611FE673C89 /* Snapped.swift in Sources */,
+				F1D76E3C8E515345EC6F56DAC01B06B8 /* SplitKit-dummy.m in Sources */,
+				4F59F89FB5BE6811CAD46D9D1D1A15C3 /* SplitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +296,7 @@
 /* Begin XCBuildConfiguration section */
 		31408A76B6E107A31B75C013E9846157 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E747418A7B879262B74A53F4949F6672 /* SplitKit.xcconfig */;
+			baseConfigurationReference = A477C9AE0F9BEB0996A92E1A32C3282F /* SplitKit.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -315,7 +331,7 @@
 		};
 		36E89E904EA455F526A3252623634F86 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E747418A7B879262B74A53F4949F6672 /* SplitKit.xcconfig */;
+			baseConfigurationReference = A477C9AE0F9BEB0996A92E1A32C3282F /* SplitKit.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -409,7 +425,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9A58BAA41BEA9F19FAA6D13B971C26DD /* Pods-SplitKit-SplitKit Example.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -449,7 +464,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1A6E51B0C42D07B8E814C596D07FF9B2 /* Pods-SplitKit-SplitKit Example.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";

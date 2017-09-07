@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "SplitKit"
-  s.version               = "1.0.1"
+  s.version               = "1.0.2"
   s.summary               = "Resizable split view that accomodates two view controllers for iOS."
   s.description           = <<-DESC
   Drop-in single file swift component to add a resizable split view that can host two controllers.

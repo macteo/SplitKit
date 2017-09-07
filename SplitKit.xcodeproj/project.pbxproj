@@ -10,7 +10,11 @@
 		959D71651F59BF1F003BB805 /* SplitKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959D715B1F59BF1F003BB805 /* SplitKit.framework */; };
 		959D716A1F59BF1F003BB805 /* SplitKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D71691F59BF1F003BB805 /* SplitKitTests.swift */; };
 		959D716C1F59BF1F003BB805 /* SplitKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 959D715E1F59BF1F003BB805 /* SplitKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		959D71761F59BF7E003BB805 /* SplitKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D71751F59BF7E003BB805 /* SplitKit.swift */; };
+		959D71761F59BF7E003BB805 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D71751F59BF7E003BB805 /* SplitViewController.swift */; };
+		95A86CC61F61D2A900B0743E /* Arrangement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A86CC51F61D2A900B0743E /* Arrangement.swift */; };
+		95A86CC81F61D37300B0743E /* InstantPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A86CC71F61D37300B0743E /* InstantPanGestureRecognizer.swift */; };
+		95A86CCA1F61D3A100B0743E /* Snapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A86CC91F61D3A100B0743E /* Snapped.swift */; };
+		95A86CCC1F61D40900B0743E /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A86CCB1F61D40900B0743E /* HandleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +34,11 @@
 		959D71641F59BF1F003BB805 /* SplitKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		959D71691F59BF1F003BB805 /* SplitKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitKitTests.swift; sourceTree = "<group>"; };
 		959D716B1F59BF1F003BB805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		959D71751F59BF7E003BB805 /* SplitKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitKit.swift; sourceTree = "<group>"; };
+		959D71751F59BF7E003BB805 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		95A86CC51F61D2A900B0743E /* Arrangement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrangement.swift; sourceTree = "<group>"; };
+		95A86CC71F61D37300B0743E /* InstantPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		95A86CC91F61D3A100B0743E /* Snapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapped.swift; sourceTree = "<group>"; };
+		95A86CCB1F61D40900B0743E /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +81,11 @@
 		959D715D1F59BF1F003BB805 /* SplitKit */ = {
 			isa = PBXGroup;
 			children = (
-				959D71751F59BF7E003BB805 /* SplitKit.swift */,
+				959D71751F59BF7E003BB805 /* SplitViewController.swift */,
+				95A86CCB1F61D40900B0743E /* HandleView.swift */,
+				95A86CC51F61D2A900B0743E /* Arrangement.swift */,
+				95A86CC91F61D3A100B0743E /* Snapped.swift */,
+				95A86CC71F61D37300B0743E /* InstantPanGestureRecognizer.swift */,
 				959D715E1F59BF1F003BB805 /* SplitKit.h */,
 				959D715F1F59BF1F003BB805 /* Info.plist */,
 			);
@@ -200,7 +212,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				959D71761F59BF7E003BB805 /* SplitKit.swift in Sources */,
+				959D71761F59BF7E003BB805 /* SplitViewController.swift in Sources */,
+				95A86CCC1F61D40900B0743E /* HandleView.swift in Sources */,
+				95A86CC61F61D2A900B0743E /* Arrangement.swift in Sources */,
+				95A86CC81F61D37300B0743E /* InstantPanGestureRecognizer.swift in Sources */,
+				95A86CCA1F61D3A100B0743E /* Snapped.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 PODS:
-  - SplitKit (1.0.0)
+  - SplitKit (1.0.2)
 
 DEPENDENCIES:
   - SplitKit (from `..`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  SplitKit: 1cf88ff339b88d3ab9e91287c7c7dd194741a11c
+  SplitKit: a28839069eaf269f75d669b7d3afd43e58176fd6
 
 PODFILE CHECKSUM: 6ec52e82cac3f34794dc6bb00d76fab3cd76a875
 

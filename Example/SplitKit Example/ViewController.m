@@ -3,7 +3,8 @@
 //  SplitKit Example
 //
 //  Created by Matteo Gavagnin on 03/09/2017.
-//  Copyright © 2017 Dolomate. All rights reserved.
+//  Copyright © 2017 Dolomate.
+//  See LICENSE file for more details.
 //
 
 #import "ViewController.h"
@@ -19,21 +20,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    DOLSplitKitViewController *splitController = [[DOLSplitKitViewController alloc] init];
+    SPKSplitViewController *splitController = [[SPKSplitViewController alloc] init];
     [self addChildViewController:splitController];
     splitController.view.frame = self.view.bounds;
     splitController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:splitController.view];
     [splitController didMoveToParentViewController:self];
-    splitController.splitDisposition = DOLSplitKitDispositionHorizontal;
+    splitController.arrangement = SPKArrangementHorizontal;
     
-    DOLSplitKitViewController *secondSplitController = [[DOLSplitKitViewController alloc] init];
+    SPKSplitViewController *secondSplitController = [[SPKSplitViewController alloc] init];
     splitController.secondChild = secondSplitController;
-    secondSplitController.splitDisposition = DOLSplitKitDispositionVertical;
+    secondSplitController.arrangement = SPKArrangementVertical;
     
-    DOLSplitKitViewController *thirdSplitController = [[DOLSplitKitViewController alloc] init];
+    SPKSplitViewController *thirdSplitController = [[SPKSplitViewController alloc] init];
     secondSplitController.firstChild = thirdSplitController;
-    thirdSplitController.splitDisposition = DOLSplitKitDispositionHorizontal;
+    thirdSplitController.arrangement = SPKArrangementHorizontal;
     
     splitController.firstChild = [[ImageViewController alloc] init];
     thirdSplitController.firstChild = [[ImageViewController alloc] init];

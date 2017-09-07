@@ -1,5 +1,5 @@
 //
-//  SplitKit.swift
+//  SplitViewController.swift
 //  SplitKit
 //
 //  Created by Matteo Gavagnin on 01/09/2017.
@@ -9,172 +9,16 @@
 
 import UIKit
 
-/// Split controller disposition
-///
-/// - horizontal: two controllers will be disposed side by side, first one on the leading side
-/// - vertical: two controllers will be disposed one on top of the other, first on top
-@objc(DOLSplitKitDisposition)
-public enum SplitKitDisposition: Int {
-    case horizontal = 0
-    case vertical = 1
-}
-
-import UIKit.UIGestureRecognizerSubclass
-
-@objc(DOLInstantPanGestureRecognizer)
-fileprivate class InstantPanGestureRecognizer: UIPanGestureRecognizer {
-    
-    fileprivate override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        if (self.state == UIGestureRecognizerState.began) { return }
-        super.touchesBegan(touches, with: event)
-        self.state = UIGestureRecognizerState.began
-    }
-}
-
-fileprivate let handleSize = CGSize(width: 32, height: 32)
-
-@objc(DOLSnappedSide)
-public enum SnappedSide: Int {
-    case none = 0
-    case lead = 1
-    case trail = 2
-    case top = 3
-    case bottom = 4
-}
-
-fileprivate let draggingAnimationDuration : TimeInterval = 0.15
-
-/// Handle View to drag the separator inspired by the one used by Apple's Swift Playgrounds app for iPad
-@objc(DOLHandleView)
-fileprivate class HandleView: UIView {
-    
-    var barColor : UIColor = UIColor(red: 233/255, green: 90/255, blue: 57/255, alpha: 1.0) {
-        didSet {
-            leftBar?.fillColor = barColor.cgColor
-            rightBar?.fillColor = barColor.cgColor
-        }
-    }
-    
-    fileprivate let snapOffset : CGFloat = 8
-    
-    var snapped : SnappedSide = .none {
-        didSet {
-            let baseFrame = CGRect(x: (bounds.size.width - barHeight) / 2, y: (bounds.size.height - barHeight) / 2, width: barHeight, height: barHeight)
-            guard let bars = bars else { return }
-            bars.frame = baseFrame
-            switch snapped {
-            case .none:
-                break
-            case .lead:
-                bars.frame.origin.x = bars.frame.origin.x + snapOffset
-                break
-            case .trail:
-                bars.frame.origin.x = bars.frame.origin.x - snapOffset
-                break
-            case .top:
-                bars.frame.origin.y = bars.frame.origin.y + snapOffset
-                break
-            case .bottom:
-                bars.frame.origin.y = bars.frame.origin.y - snapOffset
-                break
-            }
-            UIView.animate(withDuration: draggingAnimationDuration, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
-                self.layoutIfNeeded()
-            }) { (complete) in
-                
-            }
-        }
-    }
-    
-    let cornerRadius : CGFloat = 8.0
-    let backgroundGray = UIColor(red: 248/255, green: 248/255, blue: 248/255, alpha: 1)
-    let barHeight : CGFloat = 10.0
-    let barWidth : CGFloat = 2.0
-    var bars : CALayer?
-    var leftBar : CAShapeLayer?
-    var rightBar : CAShapeLayer?
-    
-    fileprivate var disposition : SplitKitDisposition = .horizontal {
-        didSet {
-            guard let bars = bars else { return }
-            switch disposition {
-            case .horizontal:
-                bars.transform = CATransform3DIdentity
-                break
-            case .vertical:
-                bars.transform = CATransform3DMakeRotation(CGFloat.pi / 2.0, 0, 0, 1)
-                break
-            }
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    convenience init(_ disposition: SplitKitDisposition) {
-        self.init(frame: CGRect(x: 0, y: 0, width: handleSize.width, height: handleSize.height))
-        defer {
-            self.disposition = disposition
-            self.snapped = .none
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    func commonInit() {
-        bounds.size = handleSize
-        layer.cornerRadius = cornerRadius
-        layer.masksToBounds = true
-        backgroundColor = backgroundGray
-        alpha = 0.0
-        bars = barsLayer
-        guard let bars = bars else { return }
-        layer.addSublayer(bars)
-    }
-    
-    lazy var barsLayer : CALayer = {
-        let barsLayer = CALayer()
-        barsLayer.frame = CGRect(x: (bounds.size.width - barHeight) / 2, y: (bounds.size.height - barHeight) / 2, width: barHeight, height: barHeight)
-        leftBar = verticalBar()
-        if let leftBar = leftBar {
-            leftBar.frame.origin.x = barWidth
-            barsLayer.addSublayer(leftBar)
-        }
-        
-        rightBar = verticalBar()
-        if let rightBar = rightBar {
-            rightBar.frame.origin.x = barWidth * 3
-            barsLayer.addSublayer(rightBar)
-        }
-        
-        return barsLayer
-    }()
-    
-    func verticalBar() -> CAShapeLayer {
-        let verticalBar = CAShapeLayer()
-        verticalBar.frame = CGRect(x: 0, y: 0, width: barWidth, height: barHeight)
-        verticalBar.path = UIBezierPath(roundedRect: verticalBar.bounds, cornerRadius: verticalBar.bounds.width / 2.0).cgPath
-        verticalBar.fillColor = barColor.cgColor
-        return verticalBar
-    }
-}
-
 /// Simple container controller that let you dispose two child controllers side by side or one on top of the other, supporting gesture to resize the different areas. Vertical and Horizontal disposition is supported.
-@objc(DOLSplitKitViewController)
-open class SplitKitViewController: UIViewController {
+@objc(SPKSplitViewController)
+open class SplitViewController: UIViewController {
 
     /// Specify the animation duration to change split orientation between horizontal to vertical and vice versa. Default is 0.25 seconds.
-    public var invertAnimationDuration : TimeInterval = 0.25
+    @objc public var invertAnimationDuration : TimeInterval = 0.25
 
     // Default value is similar to the UINavigationBar shadow.
-    
     /// Specify the split separator color
-    public var separatorColor : UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3) {
+    @objc public var separatorColor : UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3) {
         didSet {
             horizontalSeparatorHair.backgroundColor = separatorColor
             verticalSeparatorHair.backgroundColor = separatorColor
@@ -182,7 +26,7 @@ open class SplitKitViewController: UIViewController {
     }
     
     /// Specify the split separator color while being dragged
-    public var separatorSelectedColor : UIColor = UIColor(red: 233/255, green: 90/255, blue: 57/255, alpha: 1.0) {
+    @objc public var separatorSelectedColor : UIColor = UIColor(red: 233/255, green: 90/255, blue: 57/255, alpha: 1.0) {
         didSet {
             horizontalHandle.barColor = separatorSelectedColor
             verticalHandle.barColor = separatorSelectedColor
@@ -191,14 +35,14 @@ open class SplitKitViewController: UIViewController {
     
     fileprivate var shouldAnimateSplitChange = false
     
-    /// Change the controllers disposition:
+    /// Change the controllers arrangement:
     /// - side by side with `.horizontal`
     /// - top and bottom with `.vertical`
-    @objc public var splitDisposition : SplitKitDisposition = .horizontal {
+    @objc public var arrangement : Arrangement = .horizontal {
         didSet {
             let duration = shouldAnimateSplitChange ? invertAnimationDuration : 0.0
             
-            switch splitDisposition {
+            switch arrangement {
             case .horizontal:
                 firstViewTrailingConstraint.isActive = false
                 firstViewHeightConstraint.isActive = false
@@ -251,13 +95,13 @@ open class SplitKitViewController: UIViewController {
     /// Switch to the other disposition
     ///
     /// - Parameter sender: the button that triggered the orientation change
-    @IBAction func switchDisposition(_ sender: Any? = nil) {
-        switch splitDisposition {
+    @IBAction func switchArrangement(_ sender: Any? = nil) {
+        switch arrangement {
         case .horizontal:
-            splitDisposition = .vertical
+            arrangement = .vertical
             break
         case .vertical:
-            splitDisposition = .horizontal
+            arrangement = .horizontal
             break
         }
     }
@@ -480,13 +324,13 @@ open class SplitKitViewController: UIViewController {
         
         switch traitCollection.horizontalSizeClass {
         case .compact:
-            splitDisposition = .vertical
+            arrangement = .vertical
             break
         case .regular:
-            splitDisposition = .horizontal
+            arrangement = .horizontal
             break
         case .unspecified:
-            splitDisposition = .vertical
+            arrangement = .vertical
         }
 
         // We do some magic to detect bottom safe area to react the the keyboard size change (appearance, disappearance, ecc)
@@ -775,19 +619,19 @@ open class SplitKitViewController: UIViewController {
     
     open override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
-//        coordinator.animate(alongsideTransition: { [unowned self] (context) in
-//            switch newCollection.horizontalSizeClass {
-//            case .compact:
-//                self.splitDisposition = .vertical
-//                break
-//            case .regular:
-//                self.splitDisposition = .horizontal
-//                break
-//            case .unspecified:
-//                self.splitDisposition = .vertical
-//            }
-//        }) { (context) in
-//
-//        }
+        coordinator.animate(alongsideTransition: { [unowned self] (context) in
+            switch newCollection.horizontalSizeClass {
+            case .compact:
+                self.arrangement = .vertical
+                break
+            case .regular:
+                self.arrangement = .horizontal
+                break
+            case .unspecified:
+                self.arrangement = .vertical
+            }
+        }) { (context) in
+
+        }
     }
 }
