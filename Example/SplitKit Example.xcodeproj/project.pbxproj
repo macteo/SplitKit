@@ -29,6 +29,7 @@
 		952D7A841F5C1E7C00AB4102 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		952D7A861F5C1E7D00AB4102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		952D7A871F5C1E7D00AB4102 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9550EDBB1F61AF1F00F01C0A /* SplitKit Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SplitKit Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		D6AFEA628BA88E46C77E41CE /* Pods-SplitKit-SplitKit Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplitKit-SplitKit Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SplitKit-SplitKit Example/Pods-SplitKit-SplitKit Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +83,7 @@
 				952D7A831F5C1E7C00AB4102 /* LaunchScreen.storyboard */,
 				952D7A861F5C1E7D00AB4102 /* Info.plist */,
 				952D7A871F5C1E7D00AB4102 /* main.m */,
+				9550EDBB1F61AF1F00F01C0A /* SplitKit Example-Bridging-Header.h */,
 			);
 			path = "SplitKit Example";
 			sourceTree = "<group>";
@@ -129,6 +131,7 @@
 				TargetAttributes = {
 					952D7A741F5C1E7C00AB4102 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -359,13 +362,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D6AFEA628BA88E46C77E41CE /* Pods-SplitKit-SplitKit Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9S76YAVG8A;
 				INFOPLIST_FILE = "SplitKit Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dolomate.splitkit.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SplitKit Example/SplitKit Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -374,13 +383,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3294CE9172CEA789D1B495CD /* Pods-SplitKit-SplitKit Example.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9S76YAVG8A;
 				INFOPLIST_FILE = "SplitKit Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dolomate.splitkit.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SplitKit Example/SplitKit Example-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

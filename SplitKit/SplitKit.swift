@@ -194,7 +194,7 @@ open class SplitKitViewController: UIViewController {
     /// Change the controllers disposition:
     /// - side by side with `.horizontal`
     /// - top and bottom with `.vertical`
-    public var splitDisposition : SplitKitDisposition = .horizontal {
+    @objc public var splitDisposition : SplitKitDisposition = .horizontal {
         didSet {
             let duration = shouldAnimateSplitChange ? invertAnimationDuration : 0.0
             
@@ -202,11 +202,13 @@ open class SplitKitViewController: UIViewController {
             case .horizontal:
                 firstViewTrailingConstraint.isActive = false
                 firstViewHeightConstraint.isActive = false
+                firstViewHeightRatioConstraint?.isActive = false
                 secondViewFirstTopConstraint.isActive = false
                 secondViewLeadingConstraint.isActive = false
                 horizontalSeparatorView.isHidden = false
                 firstViewBottomConstraint.isActive = true
                 firstViewWidthConstraint.isActive = true
+                firstViewWidthRatioConstraint?.isActive = true
                 secondViewFirstLeadingConstraint.isActive = true
                 secondViewTopConstraint.isActive = true
                 verticalSeparatorView.isHidden = true
@@ -221,11 +223,13 @@ open class SplitKitViewController: UIViewController {
                 
                 firstViewBottomConstraint.isActive = false
                 firstViewWidthConstraint.isActive = false
+                firstViewWidthRatioConstraint?.isActive = false
                 secondViewFirstLeadingConstraint.isActive = false
                 secondViewTopConstraint.isActive = false
                 verticalSeparatorView.isHidden = false
                 firstViewTrailingConstraint.isActive = true
                 firstViewHeightConstraint.isActive = true
+                firstViewHeightRatioConstraint?.isActive = true
                 secondViewFirstTopConstraint.isActive = true
                 secondViewLeadingConstraint.isActive = true
                 horizontalSeparatorView.isHidden = true
@@ -236,6 +240,10 @@ open class SplitKitViewController: UIViewController {
                         
                 })
                 break
+            }
+            
+            if duration == 0.0 {
+                self.view.layoutIfNeeded()
             }
         }
     }
@@ -255,7 +263,7 @@ open class SplitKitViewController: UIViewController {
     }
     
     /// Set the top or leading controller
-    public var firstChild : UIViewController? {
+    @objc public var firstChild : UIViewController? {
         didSet {
             if let oldController = oldValue {
                 oldController.willMove(toParentViewController: nil)
@@ -269,11 +277,12 @@ open class SplitKitViewController: UIViewController {
                 firstContainerView.addSubview(child.view)
                 child.didMove(toParentViewController: self)
             }
+            view.layoutIfNeeded()
         }
     }
     
     /// Set the bottom or trailing controller
-    public var secondChild : UIViewController? {
+    @objc public var secondChild : UIViewController? {
         didSet {
             if let oldController = oldValue {
                 oldController.willMove(toParentViewController: nil)
@@ -287,6 +296,7 @@ open class SplitKitViewController: UIViewController {
                 secondContainerView.addSubview(child.view)
                 child.didMove(toParentViewController: self)
             }
+            view.layoutIfNeeded()
         }
     }
 
@@ -302,6 +312,9 @@ open class SplitKitViewController: UIViewController {
     private var firstViewTrailingConstraint : NSLayoutConstraint!
     private var firstViewWidthConstraint : NSLayoutConstraint!
     private var firstViewHeightConstraint : NSLayoutConstraint!
+    
+    private var firstViewWidthRatioConstraint : NSLayoutConstraint?
+    private var firstViewHeightRatioConstraint : NSLayoutConstraint?
     
     private var secondViewTopConstraint : NSLayoutConstraint!
     private var secondViewBottomConstraint : NSLayoutConstraint!
@@ -353,8 +366,10 @@ open class SplitKitViewController: UIViewController {
             firstViewWidthConstraint = NSLayoutConstraint(item: firstContainerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.bounds.size.width / 2.0)
             firstViewHeightConstraint = NSLayoutConstraint(item: firstContainerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: (view.bounds.size.height - topLayoutGuide.length - bottomLayoutGuide.length) / 2.0)
         }
+        firstViewWidthConstraint.priority = .defaultLow
         view.addConstraint(firstViewWidthConstraint!)
         
+        firstViewHeightConstraint.priority = .defaultLow
         firstViewHeightConstraint.isActive = false
         view.addConstraint(firstViewHeightConstraint!)
         
@@ -404,10 +419,10 @@ open class SplitKitViewController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: horizontalSeparatorView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: separatorSize))
         
         let horizontalPanGesture = InstantPanGestureRecognizer(target: self, action: #selector(horizontalPanGestureDidPan))
-
+        
         horizontalPanGesture.delaysTouchesBegan = false
         horizontalSeparatorView.addGestureRecognizer(horizontalPanGesture)
-
+        
         horizontalSeparatorHair.frame = horizontalSeparatorView.bounds
         horizontalSeparatorHair.backgroundColor = separatorColor
         horizontalSeparatorView.addSubview(horizontalSeparatorHair)
@@ -473,9 +488,7 @@ open class SplitKitViewController: UIViewController {
         case .unspecified:
             splitDisposition = .vertical
         }
-        
-        shouldAnimateSplitChange = true
-        
+
         // We do some magic to detect bottom safe area to react the the keyboard size change (appearance, disappearance, ecc)
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil, queue: OperationQueue.main) { [unowned self] (notification) -> Void in
             let initialRect = ((notification as NSNotification).userInfo![UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue
@@ -485,6 +498,17 @@ open class SplitKitViewController: UIViewController {
             
             self.bottomKeyboardHeight = newHeight
         }
+        
+        let horizontalRatio : CGFloat = 0.5
+        let verticalRatio : CGFloat = 0.5
+        firstViewWidthRatioConstraint = NSLayoutConstraint(item: firstContainerView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: horizontalRatio, constant: 0)
+        firstViewWidthRatioConstraint?.priority = .defaultHigh
+        view.addConstraint(firstViewWidthRatioConstraint!)
+        
+        firstViewHeightRatioConstraint = NSLayoutConstraint(item: firstContainerView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: verticalRatio, constant: 0)
+        firstViewHeightRatioConstraint?.priority = .defaultHigh
+        firstViewHeightRatioConstraint?.isActive = false
+        view.addConstraint(firstViewHeightRatioConstraint!)
     }
     
     fileprivate var didAppearFirstRound = false
@@ -499,6 +523,7 @@ open class SplitKitViewController: UIViewController {
             }
             didAppearFirstRound = true
         }
+        shouldAnimateSplitChange = true
     }
 
     private var panInitialX : CGFloat = 0.0
@@ -508,17 +533,27 @@ open class SplitKitViewController: UIViewController {
         switch sender.state {
         case .began:
             guard let senderView = sender.view else { break }
+            var ratio : CGFloat = 0.5
+            var width : CGFloat = 1.0
+            firstViewWidthRatioConstraint?.isActive = false
+            if let multiplier = firstViewWidthRatioConstraint?.multiplier {
+                ratio = multiplier
+            }
             if #available(iOS 11.0, *) {
                 panInitialX = senderView.frame.origin.x - view.safeAreaInsets.left - view.safeAreaInsets.right + senderView.frame.size.width / 2
+                width = view.bounds.size.width - view.safeAreaInsets.left - view.safeAreaInsets.right
             } else {
                 panInitialX = senderView.frame.origin.x + senderView.frame.size.width / 2
+                width = view.bounds.size.width
             }
+            firstViewWidthConstraint.constant = width * ratio
+            firstViewWidthConstraint.priority = .defaultHigh
             horizontalSeparatorWidthConstraint.constant = 2.0
             UIView.animate(withDuration: draggingAnimationDuration, delay: 0, options: .curveEaseInOut, animations: { [unowned self] in
                 self.horizontalSeparatorHair.alpha = 1.0
                 self.horizontalHandle.alpha = 1.0
                 self.horizontalSeparatorHair.backgroundColor = self.separatorSelectedColor
-                self.view.layoutIfNeeded()
+                // self.view.layoutIfNeeded()
                 }, completion: { (completed) in
                     
             })
@@ -574,8 +609,11 @@ open class SplitKitViewController: UIViewController {
                 self.horizontalSeparatorHair.backgroundColor = self.separatorColor
                 self.view.layoutIfNeeded()
             }, completion: { (completed) in
-                
+                self.restoreHorizontalRatioConstraint()
             })
+            if draggingAnimationDuration == 0.0 {
+                restoreHorizontalRatioConstraint()
+            }
             
             break
         default:
@@ -583,15 +621,43 @@ open class SplitKitViewController: UIViewController {
         }
     }
     
+    func restoreHorizontalRatioConstraint() {
+        self.firstViewWidthConstraint.priority = .defaultLow
+        var ratio : CGFloat = 1.0
+        if #available(iOS 11.0, *) {
+            ratio = self.firstContainerView.bounds.size.width / (self.view.bounds.size.width - self.view.safeAreaInsets.left - self.view.safeAreaInsets.right)
+        } else {
+            ratio = self.firstContainerView.bounds.size.width / self.view.bounds.width
+        }
+        if ratio < 0.0 {
+            ratio = 0.0
+        } else if ratio > 1.0 {
+            ratio = 1.0
+        }
+        self.firstViewWidthRatioConstraint = NSLayoutConstraint(item: self.firstContainerView, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: ratio, constant: 0)
+        self.view.addConstraint(self.firstViewWidthRatioConstraint!)
+    }
+    
     @IBAction private func verticalPanGestureDidPan(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
             guard let senderView = sender.view else { break }
+            var ratio : CGFloat = 0.5
+            var height : CGFloat = 1.0
+            if let multiplier = firstViewHeightRatioConstraint?.multiplier {
+                ratio = multiplier
+            }
+            firstViewHeightRatioConstraint?.isActive = false
+            
             if #available(iOS 11.0, *) {
                 panInitialY = senderView.frame.origin.y - view.safeAreaInsets.top - view.safeAreaInsets.bottom + senderView.frame.size.height / 2
+                height = view.bounds.size.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom
             } else {
                 panInitialY = senderView.frame.origin.y - topLayoutGuide.length - bottomLayoutGuide.length + senderView.frame.size.height / 2
+                height = view.bounds.size.height - topLayoutGuide.length - bottomLayoutGuide.length
             }
+            firstViewHeightConstraint.constant = height * ratio
+            firstViewHeightConstraint.priority = .defaultHigh
             verticalSeparatorHeightConstraint.constant = 2.0
             UIView.animate(withDuration: draggingAnimationDuration, delay: 0, options: .curveEaseInOut, animations: { [unowned self] in
                 self.verticalSeparatorHair.alpha = 1.0
@@ -654,12 +720,36 @@ open class SplitKitViewController: UIViewController {
                 self.verticalSeparatorHair.backgroundColor = self.separatorColor
                 self.view.layoutIfNeeded()
                 }, completion: { (completed) in
-                    
+                    self.restoreVerticalRatioConstraint()
             })
+            if invertAnimationDuration == 0.0 {
+                restoreVerticalRatioConstraint()
+            }
             break
         default:
             break
         }
+    }
+    
+    func restoreVerticalRatioConstraint() {
+        self.firstViewHeightConstraint.priority = .defaultLow
+        var ratio : CGFloat = 1.0
+        if #available(iOS 11.0, *) {
+            ratio = self.firstContainerView.bounds.size.height / (self.view.bounds.size.height - self.view.safeAreaInsets.top - self.view.safeAreaInsets.bottom)
+        } else {
+            ratio = self.firstContainerView.bounds.size.height / (self.view.bounds.height - self.topLayoutGuide.length - self.bottomLayoutGuide.length)
+        }
+        if ratio < 0 {
+            ratio = 0.0
+        } else if ratio > 1 {
+            ratio = 1.0
+        }
+        self.firstViewHeightRatioConstraint = NSLayoutConstraint(item: self.firstContainerView, attribute: .height, relatedBy: .equal, toItem: self.view, attribute: .height, multiplier: ratio, constant: 0)
+        self.view.addConstraint(self.firstViewHeightRatioConstraint!)
+    }
+
+    func prepareViews(animated: Bool = false) {
+        
     }
     
     override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -685,19 +775,19 @@ open class SplitKitViewController: UIViewController {
     
     open override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
-        coordinator.animate(alongsideTransition: { [unowned self] (context) in
-            switch newCollection.horizontalSizeClass {
-            case .compact:
-                self.splitDisposition = .vertical
-                break
-            case .regular:
-                self.splitDisposition = .horizontal
-                break
-            case .unspecified:
-                self.splitDisposition = .vertical
-            }
-        }) { (context) in
-            
-        }
+//        coordinator.animate(alongsideTransition: { [unowned self] (context) in
+//            switch newCollection.horizontalSizeClass {
+//            case .compact:
+//                self.splitDisposition = .vertical
+//                break
+//            case .regular:
+//                self.splitDisposition = .horizontal
+//                break
+//            case .unspecified:
+//                self.splitDisposition = .vertical
+//            }
+//        }) { (context) in
+//
+//        }
     }
 }

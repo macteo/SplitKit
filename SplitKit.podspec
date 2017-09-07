@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "SplitKit"
-  s.version               = "1.0.0"
+  s.version               = "1.0.1"
   s.summary               = "Resizable split view that accomodates two view controllers for iOS."
   s.description           = <<-DESC
   Drop-in single file swift component to add a resizable split view that can host two controllers.
@@ -18,6 +18,4 @@ Pod::Spec.new do |s|
   s.source_files          = "SplitKit/**/*.{swift}"
   s.requires_arc          = true
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0', 'SWIFT_OPTIMIZATION_LEVEL' => '-Owholemodule' }
-  
-  # Manually making Quick compiler version be swift 4.0
 end

@@ -1,3 +1,11 @@
+## 1.0.1 (2017-09-07)
+
+* Inception: example with multiple split views one inside the other.
+* Exposed few more methods to Objective-C like the ability to set actual content on the split view...
+* Better relative ration handling.
+* Fixed some resizing bugs.
+* If two guides are overlapped (one is snapped to the side) they behave correctly moving together.
+
 ## 1.0.0 (2017-09-01)
 
 * Initial release.
