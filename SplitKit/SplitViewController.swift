@@ -332,16 +332,6 @@ open class SplitViewController: UIViewController {
         case .unspecified:
             arrangement = .vertical
         }
-
-        // We do some magic to detect bottom safe area to react the the keyboard size change (appearance, disappearance, ecc)
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil, queue: OperationQueue.main) { [unowned self] (notification) -> Void in
-            let initialRect = ((notification as NSNotification).userInfo![UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue
-            let _ = self.view.frame.size.height - self.view.convert(initialRect!, from: nil).origin.y
-            let keyboardRect = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
-            let newHeight = self.view.frame.size.height - self.view.convert(keyboardRect!, from: nil).origin.y
-            
-            self.bottomKeyboardHeight = newHeight
-        }
         
         let horizontalRatio : CGFloat = 0.5
         let verticalRatio : CGFloat = 0.5
@@ -368,6 +358,28 @@ open class SplitViewController: UIViewController {
             didAppearFirstRound = true
         }
         shouldAnimateSplitChange = true
+        
+        //debugPrint(">>>>>>>> Split addObserver")
+        
+        // We do some magic to detect bottom safe area to react the the keyboard size change (appearance, disappearance, ecc)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateRect(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    @objc func updateRect(notification: NSNotification) {
+        //debugPrint(">>>>>>>> Split FIRED NOTIFICATION")
+        
+        let initialRect = ((notification as NSNotification).userInfo![UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue
+        let _ = self.view.frame.size.height - self.view.convert(initialRect!, from: nil).origin.y
+        let keyboardRect = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+        let newHeight = self.view.frame.size.height - self.view.convert(keyboardRect!, from: nil).origin.y
+        
+        self.bottomKeyboardHeight = newHeight
+    }
+    
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        //debugPrint(">>>>>>>> Split viewDidDisappear remove observer")
+        NotificationCenter.default.removeObserver(self)
     }
 
     private var panInitialX : CGFloat = 0.0
