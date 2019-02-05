@@ -13,6 +13,9 @@ import UIKit
 @objc(SPKSplitViewController)
 open class SplitViewController: UIViewController {
 
+    /// The ratio of the first child.
+    @objc public var ratio: CGFloat = 0.65
+    
     /// Specify the animation duration to change split orientation between horizontal to vertical and vice versa. Default is 0.25 seconds.
     @objc public var invertAnimationDuration : TimeInterval = 0.25
 
@@ -333,8 +336,8 @@ open class SplitViewController: UIViewController {
             arrangement = .vertical
         }
         
-        let horizontalRatio : CGFloat = 0.5
-        let verticalRatio : CGFloat = 0.5
+        let horizontalRatio : CGFloat = ratio
+        let verticalRatio : CGFloat = ratio
         firstViewWidthRatioConstraint = NSLayoutConstraint(item: firstContainerView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: horizontalRatio, constant: 0)
         firstViewWidthRatioConstraint?.priority = .defaultHigh
         view.addConstraint(firstViewWidthRatioConstraint!)
@@ -389,7 +392,7 @@ open class SplitViewController: UIViewController {
         switch sender.state {
         case .began:
             guard let senderView = sender.view else { break }
-            var ratio : CGFloat = 0.5
+            var ratio : CGFloat = self.ratio
             var width : CGFloat = 1.0
             firstViewWidthRatioConstraint?.isActive = false
             if let multiplier = firstViewWidthRatioConstraint?.multiplier {
@@ -498,7 +501,7 @@ open class SplitViewController: UIViewController {
         switch sender.state {
         case .began:
             guard let senderView = sender.view else { break }
-            var ratio : CGFloat = 0.5
+            var ratio : CGFloat = self.ratio
             var height : CGFloat = 1.0
             if let multiplier = firstViewHeightRatioConstraint?.multiplier {
                 ratio = multiplier
@@ -609,7 +612,7 @@ open class SplitViewController: UIViewController {
     }
     
     override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        var currentRatio : CGFloat = 0.0
+        let currentRatio : CGFloat
         if #available(iOS 11.0, *) {
             currentRatio = self.firstViewWidthConstraint.constant / (self.view.bounds.size.width - view.safeAreaInsets.left - view.safeAreaInsets.right)
         } else {
